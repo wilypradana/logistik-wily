@@ -1,75 +1,94 @@
-<p align="center">
-  <a href="https://laravel.com/">
-    <img src="https://laravel.com/img/logomark.min.svg" alt="laravel logo" width="75" height="75">
-  </a>
-  <a href="https://getstisla.com">
-    <img src="https://avatars2.githubusercontent.com/u/45754626?s=75&v=4" alt="Stisla logo" width="75" height="75">
-  </a>
-</p>
 
-<h1 align="center">Laravel Stisla</h1>
+# The logistik
 
-<span align="center">
+aplikasi sederhana untuk mencatat kebutuhan logistik.
+fitur utamanya adalah mencatat keluar dan masuk barang logistik anda, dengan
+tampilan nyaman, komplektivitas sistem tidak mempengaruhi kenyamanan anda.
 
-**Laravel Stisla** is a Free Bootstrap Admin Template which will help you to speed up your project and design your own dashboard UI using Laravel blade templating engine.
+Ada contoh untuk barang bisa cek dibawah :
 
-</span>
 
-<br>
+## Table Untuk Demo Barang
 
-<p align="center">
-  <a href="https://getstisla.com">Homepage</a>
-  •
-  <a href="https://github.com/edikurniawan-dev/laravel-stisla#quick-start">Getting Started</a>
-  •
-  <a href="https://demo.getstisla.com" target="_new">Demo</a>
-  •
-  <a href="https://getstisla.com/docs">Documentation</a>
-  •
-  <a href="https://getstisla.com/blog">Blog</a>
-  •
-  <a href="https://github.com/edikurniawan-dev/laravel-stisla/issues">Issue</a>
-</p>
+| **Nama Produk**   | **Kode Barang** | **Quantity** | **Origin**    |
+|--------------------|-----------------|--------------|---------------|
+| Semen             | tb01            | 200          | Indonesia     |
+| Pasir             | tb02            | 200          | Indonesia     |
+| Batu Bata         | tb03            | 200          | Indonesia     |
+| Kayu              | tb04            | 200          | Indonesia     |
+| Kabel Listrik     | tb05            | 200          | Indonesia     |
+| Saklar            | tb06            | 200          | Indonesia     |
+| Lampu             | tb07            | 200          | Indonesia     |
+| Cat               | tb08            | 200          | Indonesia     |
+| Pipa PVC          | tb09            | 200          | Indonesia     |
+| Lem               | tb10            | 200          | Indonesia     |
+| Granit            | ta01            | 200          | Belanda       |
+| Baja Tulangan     | ta02            | 200          | Jepang        |
+| AAC               | ta03            | 200          | Jepang        |
 
-<br>
 
-[![Stisla Preview](https://camo.githubusercontent.com/2135e0f6544a7286a3412cdc3df32d47fc91b045/68747470733a2f2f692e6962622e636f2f3674646d6358302f323031382d31312d31312d31352d33352d676574737469736c612d636f6d2e706e67)](https://getstisla.com)
 
-## Table of Contents
 
-- [Table of Contents](#table-of-contents)
-- [Quick start](#quick-start)
-- [License](#license)
-- [Supports](#supports)
 
-## Quick start
+## Screenshots
 
-Several quick start options are available:
+input barang masuk, no barang masuk dibuat secara random.
 
--   Clone the repo: `git clone https://github.com/edikurniawan-dev/laravel-stisla.git`
--   Run `cd` to the newly created `/laravel-stisla` directory
--   Run `composer install` command
--   Run `npm install` command
--   Run `npm run dev` command
--   Run `cp .env.example .env` command
--   Run `php artisan key:generate` command
--   Run `php artisan serve` command
--   Done
+![App Screenshot](https://ucarecdn.com/d0f68d0f-7612-4da6-8f6a-01839647f66e/input.png)
 
-Read the [documentation page](https://getstisla.com/docs) for more information on the framework contents, templates and examples, and more.
+jika input berhasil, akan ada alert success
 
-## License
+![App Screenshot](https://ucarecdn.com/6dc7d10d-85e0-42e0-951f-290f25155df1/inputberhasil.png)
 
-**Stisla** is licensed under the [MIT License](LICENSE)
 
-## Supports
+ga sengaja tekan tombol 'hapus' tenang ada konfirmasi terlebih dahulu kok!
+kesal karena setiap ingin hapus harus pencet konfirmasi? kamu juga bisa disable untuk 1 hari!
 
-Thanks to BrowserStack for their support on this open-source project!
+![App Screenshot](https://ucarecdn.com/b3566634-2b9f-4765-af6e-567c1c7b23b8/deletewtihmodalandcoockie.png)
 
-<a href="https://www.browserstack.com">
-  <img src="https://getstisla.com/svg/Browserstack-logo.svg" alt="BrowserStack" width="250">
-</a>
 
----
 
-Stisla is created by [Nauval](http://nauv.al) ([Twitter](https://twitter.com/mhdnauvalazhar)). You can support the author by donation [here](https://www.buymeacoffee.com/mhd).
+jika barang tidak ada di "gudang" kamu tidak akan bisa "mengeluarkan" barang tersebut.
+
+![App Screenshot](https://ucarecdn.com/4684fbaa-08bf-42be-a703-d60d84a82b5f/errorketikakodebarangtidakditemukan.png)
+
+
+
+stock barang di gudang hanya ada 200, kamu mencatat pengeluaran 201. kurang 1 tidak boleh!
+
+![App Screenshot](https://ucarecdn.com/3ff7cc44-7ba4-407f-ab1e-f0950355bac5/stockbarangkurang.png)
+
+
+
+
+filter sesuai dengan negara! 
+![App Screenshot](https://ucarecdn.com/ea0b64f6-3fa8-4d21-b9ce-d67f63fcabbd/filterall.png)
+
+filter menampilkan data
+
+![App Screenshot](https://ucarecdn.com/c23a1459-6484-4447-a3e4-f0c1f401ed8f/filteradadata.png)
+
+
+
+filter gagal menampilkan data
+
+![App Screenshot](https://ucarecdn.com/676d9a91-b131-46c9-b28a-af7be437aa12/tidakadadata.png)
+
+
+
+
+cari stock berdasarkan kode barang atau origin
+
+![App Screenshot](https://ucarecdn.com/00e21678-ab2d-49cf-858a-599f5b8bbe4e/caristock.png)
+
+
+yeayy ada datanya
+
+![App Screenshot](https://ucarecdn.com/16f8bab8-702b-4cc0-8520-b50309822093/hasilcaristock.png)
+
+
+yahh datanya ga ada nih
+
+![App Screenshot](https://ucarecdn.com/08d79e30-6cfd-477a-9e44-8a0943c90cf5/gagalcaristock.png)
+
+
