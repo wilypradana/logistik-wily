@@ -20,6 +20,11 @@
         </div>
 
         @endif
+        @if (\Session::has('error'))
+                <div class="alert alert-danger" role="alert">
+                    {!! \Session::get('error') !!}
+                </div>
+            @endif
         <div class="row">
             <div class="col-lg-12 col-md-12 col-12 col-sm-12">
             <div class="col-lg-7 col-md-12 col-12 col-sm-12">
@@ -36,6 +41,7 @@
                                             <th>Kode Barang</th>
                                             <th>Quantity</th>
                                             <th>origin</th>
+                                            <th>action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -45,6 +51,18 @@
                                             <td>{{$stock->kode_barang}}</td>
                                             <td>{{$stock->quantity}}</td>
                                             <td>{{$stock->origin}}</td>
+                                            <td>
+                                            <form action="{{ route('delete-stock')}}"
+                                            method="POST">
+                                             @csrf
+                                            <input type="hidden" name="id" value="{{ $stock->id }}">
+                                            <button type="submit"
+                                                    class="btn btn-danger btn-action d-flex align-items-center justify-content-center"
+                                                    title="Delete">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                            </form>
+                                            </td>
                                         </tr>
                                         @empty
                                         <tr>

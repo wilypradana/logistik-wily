@@ -61,7 +61,7 @@
                         <div class="card-header">
                             <h4>Barang keluar</h4>
                             <div class="card-header-action">
-                                <a href="{{ route('show-incomings') }}"
+                                <a href="{{ route('show-outbound') }}"
                                     class="btn btn-primary">View All</a>
                             </div>
                         </div>

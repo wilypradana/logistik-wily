@@ -92,3 +92,8 @@ yahh datanya ga ada nih
 ![App Screenshot](https://ucarecdn.com/08d79e30-6cfd-477a-9e44-8a0943c90cf5/gagalcaristock.png)
 
 
+data stock di hapus menggunakan password
+
+![App Screenshot](https://ucarecdn.com/67c52927-65ae-4b4d-abf3-296c342e8396/20241221001750.gif)
+
+

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\IncomingController;
+use App\Http\Controllers\MiddlewareController;
 use App\Http\Controllers\ModalController;
 use App\Http\Controllers\OutboundController;
 use App\Http\Controllers\StockController;
@@ -32,6 +33,18 @@ Route::get('/dashboard', function () {
 })->name("dashboard");
 
 
+
+Route::prefix('/auth')->group(function () {
+    Route::get('/login', [MiddlewareController::class, 'login'])->name("login");
+
+
+    Route::post('/login', [MiddlewareController::class, 'authenticating'])->name("authenticating");
+    Route::post('/logout', [MiddlewareController::class, 'logout'])->name("logout");
+
+})->name("login");
+
+
+
 Route::prefix('/incoming')->group(function () {
     route::get('/', [IncomingController::class, 'incomings'])->name("show-incomings");
     route::get('/tambah', [IncomingController::class, 'tambah'])->name("tambah-incomings");
@@ -56,5 +69,7 @@ Route::prefix('/outbound')->group(function () {
 
 Route::prefix('/stocks')->group(function () {
     route::get('/', [StockController::class, 'stocks'])->name("show-stocks");
+    route::post('/delete/confirm', [StockController::class, 'deleteconfirm'])->name("delete-stock");
+    route::post('/delete', [StockController::class, 'deleteproccess'])->name("delete-proccess");
 
 })->name("stocks");
