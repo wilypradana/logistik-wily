@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'detail subkriteria')
+@section('title', 'detail outbound')
 
 @push('style')
 <!-- CSS Libraries -->
@@ -12,7 +12,7 @@
 <div class="main-content">
     <section class="section">
         <div class="section-header">
-            <h1>detail subkriteria</h1>
+            <h1>detail outbound</h1>
         </div>
         @if (\Session::has('success'))
         <div class="alert alert-success" role="alert">
@@ -28,12 +28,33 @@
                             <h4>Barang Masuk</h4>
                         </div>
                         <div class="card-body p-0">
+                        <form method="GET" action="{{ route('show-outbound') }}"
+                                class="row g-3 align-items-center">
+                                <div class="col-auto">
+                                    <label for="origin" class="form-label">Filter by destination:</label>
+                                </div>
+                                <div class="col-auto">
+                                    <select name="origin" id="origin" class="form-select">
+                                        <option value="">All</option>
+                                        <option value="jepang" {{ request('origin') == 'jepang' ? 'selected' : '' }}>
+                                            Jepang</option>
+                                        <option value="belanda" {{ request('origin') == 'belanda' ? 'selected' : '' }}>
+                                            Belanda</option>
+                                        <option value="indonesia" {{ request('origin') == 'indonesia' ? 'selected' : '' }}>
+                                            Indonesia</option>
+                                    </select>
+                                </div>
+                                <div class="col-auto">
+                                    <button type="submit" class="btn btn-primary">Filter</button>
+                                </div>
+                            </form>
+
                             <div class="table-responsive">
                                 <table class="table-striped mb-0 table">
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>No barang masuk</th>
+                                            <th>No barang keluar</th>
                                             <th>Kode Barang</th>
                                             <th>Quantity</th>
                                             <th>Origin (asal barang)</th>
@@ -42,29 +63,35 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($incomings as $incoming)
+                                        @forelse($outbounds as $outbound)
                                         <tr>
                                             <td>{{$loop->iteration}}</td>
-                                            <td>{{$incoming->no_barang_masuk}}</td>
-                                            <td>{{$incoming->kode_barang}}</td>
-                                            <td>{{$incoming->quantity}}</td>
-                                            <td>{{$incoming->origin}}</td>
-                                            <td>{{$incoming->tanggal_masuk}}</td>
+                                            <td>{{$outbound->no_barang_keluar}}</td>
+                                            <td>{{$outbound->kode_barang}}</td>
+                                            <td>{{$outbound->quantity}}</td>
+                                            <td>{{$outbound->destination}}</td>
+                                            <td>{{$outbound->tanggal_keluar}}</td>
                                             <td class="d-flex">
-                                            <form action="{{ route('show-outbounds', ['id' => $incoming->id]) }}"
-                                                method="POST"
+                                            <form action="{{ route('delete-outbound')}}"
+                                            method="POST" id="deleteForm"
                                             onsubmit="event.preventDefault(); showDeleteModal(this);">
                                              @csrf
                                             @method('DELETE')
+                                            <input type="hidden" name="id" value="{{ $outbound->id }}">
                                             <button type="submit"
-                                            class="btn btn-danger btn-action d-flex align-items-center justify-content-center"
-                                            title="Delete">
-                                            <i class="fas fa-trash"></i>
+                                                    class="btn btn-danger btn-action d-flex align-items-center justify-content-center"
+                                                    title="Delete">
+                                                <i class="fas fa-trash"></i>
                                             </button>
                                             </form>
+    
                                         </td>
                                         </tr>
-                                        @endforeach
+                                        @empty
+                                        <tr>
+                                            <td colspan="4">Belum ada data.</td>
+                                        </tr>
+                                        @endforelse
                                     </tbody>
                                 </table>
                             </div>
@@ -89,7 +116,6 @@
 <script src="{{ asset('library/jqvmap/dist/maps/jquery.vmap.world.js') }}"></script>
 <script src="{{ asset('library/summernote/dist/summernote-bs4.min.js') }}"></script>
 <script src="{{ asset('library/chocolat/dist/js/jquery.chocolat.min.js') }}"></script>
-
 <!-- Page Specific JS File -->
 <script src="{{ asset('js/page/index-0.js') }}"></script>
 @endpush

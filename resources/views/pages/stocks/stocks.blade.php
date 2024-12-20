@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'detail subkriteria')
+@section('title', 'detail stocks')
 
 @push('style')
 <!-- CSS Libraries -->
@@ -12,7 +12,7 @@
 <div class="main-content">
     <section class="section">
         <div class="section-header">
-            <h1>detail subkriteria</h1>
+            <h1>detail stocks</h1>
         </div>
         @if (\Session::has('success'))
         <div class="alert alert-success" role="alert">
@@ -39,14 +39,18 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($stocks as $stock)
+                                        @forelse($stocks as $stock)
                                         <tr>
                                             <td>{{$loop->iteration}}</td>
                                             <td>{{$stock->kode_barang}}</td>
                                             <td>{{$stock->quantity}}</td>
                                             <td>{{$stock->origin}}</td>
                                         </tr>
-                                        @endforeach
+                                        @empty
+                                        <tr>
+                                            <td>Tidak ada data</td>
+                                        </tr>
+                                        @endforelse
                                     </tbody>
                                 </table>
                             </div>

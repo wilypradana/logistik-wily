@@ -10,20 +10,23 @@ use Illuminate\Http\Request;
 class IncomingController extends Controller
 {
 
-    public function incomings(){
-        $incomings = Incoming::all();
-        $type_menu  = "incomings";
-        return view("pages.incomings.incomings", compact("type_menu", "incomings"));
+    public function incomings(Request $request){
+        $origin = $request->query('origin');
+        $incomings = Incoming::when($origin, function ($query, $origin) {
+            return $query->where('origin', $origin);
+        })->get();
+        $type_menu  = "incoming";
+        return view("pages.incoming.incomings", compact("type_menu", "incomings"));
     }
     public function tambah(){
-        $type_menu  = "incomings";
-        return view("pages.incomings.tambah", compact("type_menu"));
+        $type_menu  = "incoming";
+        return view("pages.incoming.tambah", compact("type_menu"));
     }
     public function storeIncoming(Request $request)
     {
 
         $incoming = new Incoming();
-        $incoming->no_barang_masuk = substr(uniqid('BRG-', true), 0, 10);
+        $incoming->no_barang_masuk = 'BRG-' . random_int(1000, 9999);
         $incoming->kode_barang = $request->kode_barang;
         $incoming->quantity = $request->quantity;
         $incoming->origin = $request->origin;
@@ -58,5 +61,15 @@ class IncomingController extends Controller
             "origin" => $request->origin,
         ]);
         return redirect()->back()->with('success', 'Data berhasil disimpan');
+    }
+
+    public function deleteIncomings(Request $request){
+        $id =  $request->id;
+        $incoming = Incoming::findOrFail($id);
+      
+       
+        $incoming->delete();
+
+        return redirect()->back()->with('success', 'Data berhasil dihapus');
     }
 }

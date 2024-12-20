@@ -1,10 +1,10 @@
 <div class="main-sidebar sidebar-style-2">
     <aside id="sidebar-wrapper">
         <div class="sidebar-brand">
-            <a href="index.html">Stisla</a>
+            <a href="{{ route('dashboard') }}">Stisla</a>
         </div>
         <div class="sidebar-brand sidebar-brand-sm">
-            <a href="index.html">St</a>
+            <a href="{{ route('dashboard') }}">St</a>
         </div>
         <ul class="sidebar-menu">
             <li class="menu-header">Dashboard</li>
@@ -12,9 +12,9 @@
                 <a href="#"
                     class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Dashboard</span></a>
                 <ul class="dropdown-menu">
-                    <li class='{{ Request::is('dashboard-general-dashboard') ? 'active' : '' }}'>
+                    <li class='{{ Request::is('dashboard') ? 'active' : '' }}'>
                         <a class="nav-link"
-                            href="{{ url('dashboard-general-dashboard') }}">Dashboard</a>
+                            href="{{ route('dashboard') }}">Dashboard</a>
                     </li>
                 </ul>
             </li>
@@ -41,13 +41,13 @@
                     class="nav-link has-dropdown"
                     data-toggle="dropdown"><i class="fas fa-columns"></i> <span>barang keluar</span></a>
                 <ul class="dropdown-menu">
-                    <li class="{{ Request::is('incomings*') ? 'active' : '' }}">
+                    <li class="{{ Request::is('incoming') ? 'active' : '' }}">
                         <a class="nav-link"
-                            href="{{ route('show-outbounds') }}">data barang keluar</a>
+                            href="{{ route('show-outbound') }}">data barang keluar</a>
                     </li>
-                    <li class="{{ Request::is('outbounds/tambah') ? 'active' : '' }}">
+                    <li class="{{ Request::is('outbound/tambah') ? 'active' : '' }}">
                         <a class="nav-link"
-                            href="{{ route('tambah-outbounds') }}">pencatatan barang keluar</a>
+                            href="{{ route('tambah-outbound') }}">pencatatan barang keluar</a>
                     </li>
                 </ul>
             </li>

@@ -22,7 +22,7 @@
                         <div class="card-header">
                             <h4>Barang Masuk</h4>
                             <div class="card-header-action">
-                                <a href="#"
+                                <a href="{{ route('show-incomings') }}"
                                     class="btn btn-primary">View All</a>
                             </div>
                         </div>
@@ -35,23 +35,60 @@
                                             <th>No barang masuk</th>
                                             <th>Kode Barang</th>
                                             <th>Quantity</th>
-                                            <th>Origin (asal barang)</th>
+                                            <th>origin (asal barang)</th>
                                             <th>Tanggal Masuk</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                    @foreach($incomings as $incoming)
                                         <tr>
-                                            <td>
-                                                <a class="btn btn-primary btn-action mr-1"
-                                                    data-toggle="tooltip"
-                                                    title="Edit"><i class="fas fa-pencil-alt"></i></a>
-                                                <a class="btn btn-danger btn-action"
-                                                    data-toggle="tooltip"
-                                                    title="Delete"
-                                                    data-confirm="Are You Sure?|This action can not be undone. Do you want to continue?"
-                                                    data-confirm-yes="alert('Deleted')"><i class="fas fa-trash"></i></a>
-                                            </td>
+                                            <td>{{$loop->iteration}}</td>
+                                            <td>{{$incoming->no_barang_masuk}}</td>
+                                            <td>{{$incoming->kode_barang}}</td>
+                                            <td>{{$incoming->quantity}}</td>
+                                            <td>{{$incoming->origin}}</td>
+                                            <td>{{$incoming->tanggal_masuk}}</td>
                                         </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <div class="col-lg-7 col-md-12 col-12 col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Barang keluar</h4>
+                            <div class="card-header-action">
+                                <a href="{{ route('show-incomings') }}"
+                                    class="btn btn-primary">View All</a>
+                            </div>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="table-responsive">
+                                <table class="table-striped mb-0 table">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>No barang keluar</th>
+                                            <th>Kode Barang</th>
+                                            <th>Quantity</th>
+                                            <th>Destinantion (tujuan barang)</th>
+                                            <th>Tanggal Keluar</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach($outbounds as $outbound)
+                                        <tr>
+                                            <td>{{$loop->iteration}}</td>
+                                            <td>{{$outbound->no_barang_keluar}}</td>
+                                            <td>{{$outbound->kode_barang}}</td>
+                                            <td>{{$outbound->quantity}}</td>
+                                            <td>{{$outbound->destination}}</td>
+                                            <td>{{$outbound->tanggal_keluar}}</td>
+                                        </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>

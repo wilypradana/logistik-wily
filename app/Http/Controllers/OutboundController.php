@@ -9,21 +9,24 @@ use Illuminate\Http\Request;
 
 class OutboundController extends Controller
 {
-    public function outbounds(){
-        $outbounds = Outbound::all();
-        $type_menu  = "outbounds";
-        return view("pages.outbounds.outbounds", compact("type_menu", "outbounds"));
+    public function outbounds(Request $request){
+        $destination = $request->query('origin');
+        $outbounds = Outbound::when($destination, function ($query, $destination) {
+            return $query->where('destination', $destination);
+        })->get();
+        $type_menu  = "outbound";
+        return view("pages.outbound.outbounds", compact("type_menu", "outbounds"));
     }
 
     public function tambah(){
         $type_menu  = "layout";
-        return view("pages.outbounds.tambah", compact("type_menu"));
+        return view("pages.outbound.tambah", compact("type_menu"));
     }
     public function storeOutbound(Request $request)
     {
 
         $outbound = new Outbound();
-        $outbound->no_barang_keluar = substr(uniqid('BRGOUT-', true), 0, 10);
+        $outbound->no_barang_keluar = 'BRGOUT-' . random_int(1000, 9999);
         $outbound->kode_barang = $request->kode_barang;
         $outbound->quantity = $request->quantity;
         $outbound->destination = $request->destinasi;
@@ -35,18 +38,19 @@ class OutboundController extends Controller
             // jika tanggal keluarnya berbeda dengan tanggal sekarang, maka isi sesuai dengan request
             $outbound->tanggal_keluar = $request->tanggal_keluar;
         }
-  
+        $stock = Stock::where('kode_barang', $request->kode_barang)->first();
+        if ($stock == null) {
+            return redirect()->back()->with('error', 'kode barang tidak ditemukan');
+        }else if($outbound->quantity > $stock->quantity){
+            return redirect()->back()->with('error', 'stock barang kurang');
+        }
         $outbound->save();
         
         // logic stock
         // cari stock yang kode barangnya sama dengan yang di request
-        $stock = Stock::where('kode_barang', $request->kode_barang)->first();
-        if ($stock == null) {
-            return redirect()->back()->with('error', 'kode barang tidak ditemukan');
-        }
         // kalau ada jumlah yang ada di gudang table berkurang sesuai request yang keluar. 
         if ($stock) {
-            $quantity = $stock->quantity + $request->quantity;
+            $quantity = $stock->quantity - $request->quantity;
         }else{
             // jika tidak ada stock (menambah barang baru) quantity tidak akan di tambah.
             $quantity = $request->quantity;
