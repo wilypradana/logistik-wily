@@ -51,17 +51,19 @@
                                             <td>{{$outbound->destination}}</td>
                                             <td>{{$outbound->tanggal_keluar}}</td>
                                             <td class="d-flex">
-                                            <form action="{{ route('show-outbounds', ['id' => $outbound->id]) }}"
-                                                method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit"
+                                            <form action="{{ route('delete-outbounds')}}"
+                                            method="POST" id="deleteForm"
+                                            onsubmit="event.preventDefault(); showDeleteModal(this);">
+                                             @csrf
+                                            @method('DELETE')
+                                            <input type="hidden" name="id" value="{{ $outbound->id }}">
+                                            <button type="submit"
                                                     class="btn btn-danger btn-action d-flex align-items-center justify-content-center"
-                                                    onclick="return confirm('Anda yakin ingin menghapus subkriteria ini?')"
                                                     title="Delete">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </form>
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </form>
+    
                                         </td>
                                         </tr>
                                         @endforeach
@@ -89,7 +91,28 @@
 <script src="{{ asset('library/jqvmap/dist/maps/jquery.vmap.world.js') }}"></script>
 <script src="{{ asset('library/summernote/dist/summernote-bs4.min.js') }}"></script>
 <script src="{{ asset('library/chocolat/dist/js/jquery.chocolat.min.js') }}"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+    if (!getCookie('hideModal')) {
+        $('#reminderModal').modal('show');
+    }else{
+        form.submit();
+    }
+    
+    document.getElementById('confirmDelete').addEventListener('click', function() {
+        if (document.getElementById('dontShowToday').checked) {
+            // Set cookie untuk 24 jam
+            setCookie('hideModal', 'true', 1);
+        }
+        if (window.currentForm) {
+            window.currentForm.submit();
+        }
+        
+        $('#reminderModal').modal('hide');
+    });
+});
 
+</script>
 <!-- Page Specific JS File -->
 <script src="{{ asset('js/page/index-0.js') }}"></script>
 @endpush

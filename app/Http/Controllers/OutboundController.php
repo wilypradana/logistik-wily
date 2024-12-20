@@ -39,11 +39,21 @@ class OutboundController extends Controller
         $outbound->save();
         
         // logic stock
-
         // cari stock yang kode barangnya sama dengan yang di request
         $stock = Stock::where('kode_barang', $request->kode_barang)->first();
+        if ($stock == null) {
+            return redirect()->back()->with('error', 'kode barang tidak ditemukan');
+        }
         // kalau ada jumlah yang ada di gudang table berkurang sesuai request yang keluar. 
-        $quantity = $stock->quantity - $request->quantity;
+        if ($stock) {
+            $quantity = $stock->quantity + $request->quantity;
+        }else{
+            // jika tidak ada stock (menambah barang baru) quantity tidak akan di tambah.
+            $quantity = $request->quantity;
+        }
+        
+       
+     
         // stock akan di update atau dibuat jika kode barang tidak ada maka dibuat jika ada di update quantitynya
         $stock = Stock::updateOrCreate([
             "kode_barang" => $request->kode_barang,
@@ -54,5 +64,13 @@ class OutboundController extends Controller
 
         // kemabli membawa pesan sukses
         return redirect()->back()->with('success', 'Data berhasil disimpan');
+    }
+
+
+    public function deleteOutbounds(Request $request){
+        $id =  $request->id;
+        $outbound = Outbound::findOrFail($id);
+        $outbound->delete();
+        return redirect()->back()->with('success', 'Data berhasil dihapus');
     }
 }

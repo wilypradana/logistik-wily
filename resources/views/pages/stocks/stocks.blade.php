@@ -33,36 +33,18 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>No barang masuk</th>
                                             <th>Kode Barang</th>
                                             <th>Quantity</th>
-                                            <th>Origin (asal barang)</th>
-                                            <th>Tanggal Masuk</th>
-                                            <th>action</th>
+                                            <th>origin</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($incomings as $incoming)
+                                        @foreach($stocks as $stock)
                                         <tr>
                                             <td>{{$loop->iteration}}</td>
-                                            <td>{{$incoming->no_barang_masuk}}</td>
-                                            <td>{{$incoming->kode_barang}}</td>
-                                            <td>{{$incoming->quantity}}</td>
-                                            <td>{{$incoming->origin}}</td>
-                                            <td>{{$incoming->tanggal_masuk}}</td>
-                                            <td class="d-flex">
-                                            <form action="{{ route('show-outbounds', ['id' => $incoming->id]) }}"
-                                                method="POST"
-                                            onsubmit="event.preventDefault(); showDeleteModal(this);">
-                                             @csrf
-                                            @method('DELETE')
-                                            <button type="submit"
-                                            class="btn btn-danger btn-action d-flex align-items-center justify-content-center"
-                                            title="Delete">
-                                            <i class="fas fa-trash"></i>
-                                            </button>
-                                            </form>
-                                        </td>
+                                            <td>{{$stock->kode_barang}}</td>
+                                            <td>{{$stock->quantity}}</td>
+                                            <td>{{$stock->origin}}</td>
                                         </tr>
                                         @endforeach
                                     </tbody>
@@ -76,6 +58,7 @@
 </div>
 
 </section>
+
 </div>
 
 

@@ -14,11 +14,7 @@
                 <ul class="dropdown-menu">
                     <li class='{{ Request::is('dashboard-general-dashboard') ? 'active' : '' }}'>
                         <a class="nav-link"
-                            href="{{ url('dashboard-general-dashboard') }}">General Dashboard</a>
-                    </li>
-                    <li class="{{ Request::is('dashboard-ecommerce-dashboard') ? 'active' : '' }}">
-                        <a class="nav-link"
-                            href="{{ url('dashboard-ecommerce-dashboard') }}">Ecommerce Dashboard</a>
+                            href="{{ url('dashboard-general-dashboard') }}">Dashboard</a>
                     </li>
                 </ul>
             </li>
@@ -55,9 +51,9 @@
                     </li>
                 </ul>
             </li>
-            <li class="{{ Request::is('blank-page') ? 'active' : '' }}">
+            <li class="{{ Request::is('stocks') ? 'active' : '' }}">
                 <a class="nav-link"
-                    href="{{ url('blank-page') }}"><i class="far fa-square"></i> <span>stocks</span></a>
+                    href="{{ route('show-stocks') }}"><i class="far fa-square"></i> <span>stocks</span></a>
             </li>
     </aside>
 </div>
