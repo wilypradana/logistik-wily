@@ -1,14 +1,19 @@
 
 # The logistik
+```javascript
+kredensial login:
+email : admin@gmail.com
+password : rahasiapakebanget
+```
+
+
 
 aplikasi sederhana untuk mencatat kebutuhan logistik.
 fitur utamanya adalah mencatat keluar dan masuk barang logistik anda, dengan
 tampilan nyaman, komplektivitas sistem tidak mempengaruhi kenyamanan anda.
 
 Ada contoh untuk barang bisa cek dibawah :
-kredensial login:
-email : admin@gmail.com
-password : rahasiapakebanget
+
 
 ## Peta directory
 
