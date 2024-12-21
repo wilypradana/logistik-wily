@@ -17,13 +17,16 @@ class StockController extends Controller
         ->orWhere('origin', 'like', '%' . $searchQuery . '%')->paginate(10);
         return view("pages.stocks.stocks", compact("type_menu", "stocks"));
     }
+    // dari halaman untuk mengirim sebuah data berupa id ke halaman confirm
     public function deleteconfirm(Request $request){
         $data = $request->get('id');
        
         return view("pages.stocks.confirm", compact("data"));
     }
+
+    // halaman confirm mengeksekusi function ini. 
     public function deleteproccess(Request $request){
-      
+
         $data = $request->get('id');
 
       
@@ -31,7 +34,7 @@ class StockController extends Controller
             'password' => $request->input('password')
         ];
         
-        
+        // cek password seperti biasa
         if (Auth::check() && Hash::check($credentials['password'], Auth::user()->password)) {
           
             Stock::where('id', $data)->delete();

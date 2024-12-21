@@ -8,6 +8,52 @@ tampilan nyaman, komplektivitas sistem tidak mempengaruhi kenyamanan anda.
 Ada contoh untuk barang bisa cek dibawah :
 
 
+## Peta directory
+
+frontend
+
+```bash
+  view/components/pages/*
+```
+
+```bash
+  view/components/layouts/app.blade.php // main dir dont change!
+```
+```bash
+  view/components/layouts/auth.blade.php
+```
+
+```bash
+  view/components/components/header.blade.php
+```
+```bash
+  view/components/components/sidebar.blade.php
+```
+```bash
+  view/components/components/delete-modal.blade.php
+```
+
+## backend
+
+backend controllers
+
+```bash
+  app/http/controllers
+```
+
+backend route
+
+```bash
+  route/web.php
+```
+
+Custom js for modal, segala proses hapus data di hanndle langsung menggunakan laravel, javascript hanya untuk menaruh coockie modal.
+
+```bash
+    public/page/custom.js
+```
+
+
 ## Table Untuk Demo Barang
 
 | **Nama Produk**   | **Kode Barang** | **Quantity** | **Origin**    |
@@ -25,6 +71,7 @@ Ada contoh untuk barang bisa cek dibawah :
 | Granit            | ta01            | 200          | Belanda       |
 | Baja Tulangan     | ta02            | 200          | Jepang        |
 | AAC               | ta03            | 200          | Jepang        |
+
 
 
 
@@ -95,5 +142,11 @@ yahh datanya ga ada nih
 data stock di hapus menggunakan password
 
 ![App Screenshot](https://ucarecdn.com/67c52927-65ae-4b4d-abf3-296c342e8396/20241221001750.gif)
+
+
+
+login, login, login!
+
+![App Screenshot](https://ucarecdn.com/7df8be80-6447-44e6-a5df-fa47cdbfb0ac/login.png)
 
 

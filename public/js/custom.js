@@ -1,7 +1,10 @@
 function setCookie(name, value, days) {
     var expires = "";
-    if (days) {
+    if (days) { 
+
         var date = new Date();
+        // hasil dari setTime dibawah adalah 86400000 ms 
+        // 1 hari * 24 jam * 60 menit * 60 detik * 1000ms
         date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
         expires = "; expires=" + date.toUTCString();
     }
@@ -20,6 +23,7 @@ function getCookie(name) {
 }
 function showDeleteModal(id) {
     // Cek cookie
+    // untuk fix bug modal appear di awal. memanipulasi modal.
     let modal = document.getElementById('modal')
     modal.classList.remove("d-none")
     if (getCookie('hideDeleteModal')) {
@@ -36,6 +40,8 @@ function showDeleteModal(id) {
 document.getElementById('confirmDelete').addEventListener('click', function() {
     if (document.getElementById('dontShowToday').checked) {
         // Set cookie untuk 24 jam
+
+        // menjalankan fungsi setCoockie dengan mengirim 3 paramater, name value dan days 1 = 1 day
         setCookie('hideDeleteModal', 'true', 1);
     }
     
